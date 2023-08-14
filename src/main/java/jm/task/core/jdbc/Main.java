@@ -35,5 +35,6 @@ public class Main {
         listOfAllUser3.forEach(System.out::println);
 
         userService.dropUsersTable();
+        // test
     }
 }
