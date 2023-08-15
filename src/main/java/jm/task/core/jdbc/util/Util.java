@@ -3,16 +3,15 @@ package jm.task.core.jdbc.util;
 import jm.task.core.jdbc.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
-import org.hibernate.service.Service;
 import org.hibernate.service.ServiceRegistry;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
+
+// 20230815 Arbeit
 
 public final class Util {
     // реализуйте настройку соеденения с БД
@@ -31,7 +30,7 @@ public final class Util {
     private static final String HIBERNATE_CURRENT_SESSION_CONTEXT_CLASS = "thread";
     private static final String HIBERNATE_HBM2DDL_AUTO = ""; // теперь таблица не будет удаляться и создаваться автоматически // "create-drop"; // "none" ???
     private static SessionFactory sessionFactory = null;
-    private static ThreadLocal<Session> threadLocal = null;
+    private static final ThreadLocal<Session> threadLocal = null;
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {

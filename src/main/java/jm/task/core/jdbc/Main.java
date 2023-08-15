@@ -6,6 +6,8 @@ import jm.task.core.jdbc.service.UserServiceImpl;
 
 import java.util.List;
 
+// 20230815 Arbeit
+
 public class Main {
     public static void main(String[] args) {
         // реализуйте алгоритм здесь
@@ -35,6 +37,5 @@ public class Main {
         listOfAllUser3.forEach(System.out::println);
 
         userService.dropUsersTable();
-        // test
     }
 }
