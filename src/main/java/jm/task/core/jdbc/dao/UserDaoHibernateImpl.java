@@ -65,20 +65,14 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void removeUserById(long id) {
         Transaction transaction = null;
-        User user = null;
 
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
 
-            session.delete(session.get(User.class, id));
+            session.createQuery("delete User where id = :param")
+                    .setParameter("param", id)
+                    .executeUpdate();
 
-            // ???
-//            User user = new User();
-//            user.setId(id);
-//            session.delete(user);
-
-            // second variant with [remove] - what's the difference?
-            //session.remove(user);
             transaction.commit();
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -88,6 +82,7 @@ public class UserDaoHibernateImpl implements UserDao {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<User> getAllUsers() {
         List<User> listOfAllUsers = new ArrayList<>();
@@ -95,16 +90,7 @@ public class UserDaoHibernateImpl implements UserDao {
         Transaction transaction = null;
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-
-            // is deprecated!!!
-            //listOfAllUsers = session.createCriteria(User.class).list();
-
-            // another variant with [criteria]
-//            CriteriaQuery<User> criteriaQuery = session.getCriteriaBuilder().createQuery(User.class);
-//            criteriaQuery.from(User.class);
-//            listOfAllUsers = session.createQuery(criteriaQuery).getResultList();
             listOfAllUsers = session.createQuery("from User").list();
-
             transaction.commit();
         } catch (Exception exception) {
             exception.printStackTrace();

@@ -1,7 +1,6 @@
 package jm.task.core.jdbc.util;
 
 import jm.task.core.jdbc.model.User;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -11,14 +10,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
 
-// 20230815 Arbeit
-
 public final class Util {
     // реализуйте настройку соеденения с БД
     private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
-
-    //    // testing the program with another DB
-//    private static final String DB_URL = "jdbc:mysql://localhost:3306/kata_preproject_1";
     private static final String DB_URL = "jdbc:mysql://localhost:3306/test";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "root";
@@ -30,7 +24,7 @@ public final class Util {
     private static final String HIBERNATE_CURRENT_SESSION_CONTEXT_CLASS = "thread";
     private static final String HIBERNATE_HBM2DDL_AUTO = ""; // теперь таблица не будет удаляться и создаваться автоматически // "create-drop"; // "none" ???
     private static SessionFactory sessionFactory = null;
-    private static final ThreadLocal<Session> threadLocal = null;
+
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
@@ -58,16 +52,6 @@ public final class Util {
             }
         }
         return sessionFactory;
-    }
-
-    public static void closeSessionFactory() {
-        if (sessionFactory != null) {
-            try {
-                sessionFactory.close();
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }
     }
 
     private Util() {

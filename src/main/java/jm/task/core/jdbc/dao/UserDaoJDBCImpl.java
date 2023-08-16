@@ -8,7 +8,6 @@ import java.util.List;
 import jm.task.core.jdbc.util.Util;
 
 public class UserDaoJDBCImpl implements UserDao {
-    //private static final Connection connection = Util.getConnection();
     private static final String SQL_SELECT_ALL_USERS = "SELECT * FROM users";
     private static final String SQL_CLEAN_USERS_TABLE = "DELETE FROM users";
     private static final String SQL_DROP_USERS_TABLE = "DROP TABLE IF EXISTS users";
