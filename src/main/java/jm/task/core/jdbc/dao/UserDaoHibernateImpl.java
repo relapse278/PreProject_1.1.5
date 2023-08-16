@@ -18,7 +18,6 @@ public class UserDaoHibernateImpl implements UserDao {
 
     }
 
-
     @Override
     public void createUsersTable() {
         sqlQuery(SQL_CREATE_USER_TABLE);
@@ -27,6 +26,10 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void dropUsersTable() {
         sqlQuery(SQL_DROP_USERS_TABLE);
+    }
+
+    public void closeDb() {
+        Util.getSessionFactory().close();
     }
 
     private void sqlQuery(String sql) {
